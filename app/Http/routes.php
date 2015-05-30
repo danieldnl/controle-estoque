@@ -11,11 +11,9 @@
 |
 */
 
-Route::get('/', 'WelcomeController@index');
+Route:get('/', function () 
+{
+	return '<h1>Primeira Lógica com o Laravel.</h1>';
+});
 
-Route::get('home', 'HomeController@index');
-
-Route::controllers([
-	'auth' => 'Auth\AuthController',
-	'password' => 'Auth\PasswordController',
-]);
+Route::get('/produtos', 'ProdutoController@lista');
