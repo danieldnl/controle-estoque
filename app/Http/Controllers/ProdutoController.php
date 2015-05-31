@@ -1,24 +1,46 @@
 <?php namespace estoque\Http\Controllers;
 
+// Injeção de dependências do Laravel
 use Illuminate\Support\Facades\DB;
+use Request;
 
 class ProdutoController extends Controller {
 	public function lista()
 	{
 		$produtos = DB::select('select * from produtos');
 		
-		$html = '<h1>Listagem de Produtos com Laravel</h1>';
-		$html .= '<ul>';
+		//return view('listagem')->with('produtos', $produtos);
+		# Método mágico!
+		//return view('listagem')->withProdutos($produtos);
+		return view('produto.listagem')->withProdutos($produtos);
+	}
+	
+	public function mostra ($id)
+	{
+		// Verificar se o parâmetro existe
 		
-		$produtos = DB::select('select * from produtos');
 		
-		foreach ($produtos as $p) {
-			$html .= '<li> Nome: ' . $p->nome . ', Descrição: ' . $p->descricao . '</li>';
+		// Lista todos os params 
+		// $input = Request::all();
+		
+		// apenas nome e id
+		// $input = Request::only('nome', 'id');
+		
+		// todos os parms, menos o id
+		// $input = Request::except('id');
+		
+		//$id = Request::input('id', '0'); -- Recuperando parâmetro da requisição
+		
+		// Recuperando parâmetro da rota, caso a mesma não esteja sendo informada como parâmetro do método
+		//$id = Request::route('id');
+		
+		$resposta = DB::select('select * from produtos where id = ?', [$id]);
+		
+		if (empty($resposta)) {
+			return "Esse produto não existe";
 		}
 		
-		$html .= '</ul>';
-		
-		return $html;
+		return view('produto.detalhes')->with('p', $resposta[0]);
 	}
 }
 
