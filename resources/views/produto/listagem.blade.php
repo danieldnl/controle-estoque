@@ -3,6 +3,15 @@
 @section('conteudo')
 
 <h1>Listagem de produtos</h1>
+@if(old('nome'))
+	<div class="alert alert-success" role="alert">
+		<p>
+			<strong>Sucesso!</strong>
+			O produto {{ old('nome') }} foi salvo com sucesso!
+		</p>
+	</div>
+@endif
+
 @if(empty($produtos))
 	<div class="alert alert-danger">
 		Você não tem nenhum produto cadastrado.
@@ -15,10 +24,20 @@
 					<td>{{ $p->nome }}</td>
 					<td>{{ $p->valor }}</td>
 					<td>{{ $p->descricao }}</td>
-					<td>{{ $p->quantidade }}</td>
-					<td>
-						<a href="/produtos/mostra/{{ $p->id }}">
+					<td class="text-center">{{ $p->quantidade }}</td>
+					<td class="text-center">
+						<a href="{{ action('ProdutoController@mostra', $p->id) }}">
 							<span class="glyphicon glyphicon-search"></span>
+						</a>
+					</td>
+					<td class="text-center">
+						<a href="{{ action('ProdutoController@edita', $p->id) }}">
+							<span class="glyphicon glyphicon-edit"></span>
+						</a>
+					</td>
+					<td class="text-center">
+						<a href="{{ action('ProdutoController@remove', $p->id) }}">
+							<span class="glyphicon glyphicon-trash"></span>
 						</a>
 					</td>
 				</tr>
