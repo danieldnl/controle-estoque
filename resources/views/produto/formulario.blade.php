@@ -31,16 +31,32 @@
 	</div>
 	<div class="form-group">
 		<label for="valor">Valor</label>
-		<input type="text" name="valor" class="form-control" value="{{ isset($p) ? $p->valor : old('valor') }}">
+		<div class="input-group">
+			<div class="input-group-addon">R$</div>
+			<input type="text" name="valor" class="form-control" value="{{ isset($p) ? $p->valor : old('valor') }}">
+		</div>
 	</div>
 	<div class="form-group">
 		<label for="quantidade">Quantidade</label>
 		<input type="number" name="quantidade" class="form-control" value="{{ isset($p) ? $p->quantidade : old('quantidade') }}">
 	</div>
 	
-	<button type="submit" class="btn btn-lg btn-primary btn-block">
+	<hr>
+	<button type="submit" class="btn btn-primary">
 		<span class="glyphicon glyphicon-floppy-disk"></span> {{ isset($p) ? 'Alterar' : 'Adicionar' }}
+	</button>
+	<button id="btn-cancelar" type="button" class="btn btn-danger">
+		<span class="glyphicon glyphicon-remove"></span> Cancelar
 	</button>
 </form>
 
+<!-- Scripts da página -->
+<script type="text/javascript">
+	$(document).ready(function () {
+		// Evento para retornar a tela inicial
+		$('#btn-cancelar').click(function () {
+			window.location = "{{ action('ProdutoController@lista') }}";
+		});
+	});
+</script>
 @stop

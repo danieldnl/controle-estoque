@@ -9,6 +9,13 @@ use estoque\estoque;
 use estoque\Http\Requests\ProdutoRequest;
 
 class ProdutoController extends Controller {
+
+	public function __construct()
+	{
+		/* $this->middleware('auth', array('only', 
+				array('adiciona', 'edita', 'remove'))); */
+	}
+	
 	public function lista()
 	{
 		$produtos = Produto::all();
@@ -59,7 +66,7 @@ class ProdutoController extends Controller {
 	
 	public function altera (ProdutoRequest $request)
 	{
-		$produto = Produto::find($requestinput('id'));
+		$produto = Produto::find($request->input('id'));
 		$produto->nome = $request->input('nome');
 		$produto->descricao = $request->input('descricao');
 		$produto->valor = $request->input('valor');
@@ -78,6 +85,5 @@ class ProdutoController extends Controller {
 		
 		return redirect()->action('ProdutoController@lista');
 	}
+
 }
-
-

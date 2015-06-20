@@ -26,3 +26,23 @@ footer.footer {
 footer.footer p {
 	padding: 10px;
 }
+
+.navbar-default .navbar-nav > .open > a,
+.navbar-default .navbar-nav > .open > a:hover,
+.navbar-default .navbar-nav > .open > a:focus {
+    color: #FFF !important;
+    background-color: #4C9ED9 !important;
+}
+
+.dropdown-menu>li>a {
+	color: #555 !important;
+}
+
+.dropdown-menu>li>a:hover, .dropdown-menu>li>a:focus {
+	background-image: none !important;
+}
+
+.dropdown-menu>li>a:hover, .dropdown-menu>li>a:focus {
+	color: #FFF !important;
+	background-color: #337ab7;
+}

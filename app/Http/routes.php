@@ -23,4 +23,13 @@ Route::get('/produtos/novo', 'ProdutoController@novo');
 Route::get('/produtos/edita/{id}', 'ProdutoController@edita');
 Route::post('/produtos/altera', 'ProdutoController@altera');
 Route::post('/produtos/adiciona', 'ProdutoController@adiciona');
-Route::get('/produtos/remove/{id}', 'ProdutoController@remove');
+Route::post('/produtos/remove/{id}', 'ProdutoController@remove');
+
+Route::get('/home', 'HomeController@index');
+
+Route::controllers([
+	'auth' => 'Auth\AuthController',
+	'password' => 'Auth\PasswordController'
+]);
+
+Route::get('/login', 'LoginController@login');
